@@ -7,7 +7,6 @@ class InputForm extends React.Component {
   }
 
   addMessage(event){
-    console.log(event)
     if(event.key && event.key != "Enter"){
       return;
     }

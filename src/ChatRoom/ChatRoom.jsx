@@ -68,7 +68,6 @@ class ChatRoom extends React.Component {
 
   componentDidMount() {
     this.service.getChat(this.state.chatId).then(chat => {
-      console.log(chat);
       this.setState(state => ({
         items: chat.messages.map(m => {
           m.isMy = m.userId == this.state.user.id;
