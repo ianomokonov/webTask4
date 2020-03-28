@@ -83,7 +83,7 @@
                 return array("message" => "Укажите id чата");
             }
             try{
-                $sth = $this->db->prepare("SELECT * FROM messages WHERE chatId = ?");
+                $sth = $this->db->prepare("SELECT m.id, m.chatId, m.userId, u.login as userLogin, m.message, m.created FROM messages m JOIN users u ON m.userId = u.id WHERE chatId = ?");
                 $sth->setFetchMode(PDO::FETCH_CLASS, 'Message');
                 $sth->execute(array($chatId));
                 return $sth->fetchAll();
@@ -117,7 +117,7 @@
 
         private function GetMessageById($id){
             if($id){
-                $sth = $this->db->prepare("SELECT * FROM messages WHERE id = ?");
+                $sth = $this->db->prepare("SELECT m.id, m.chatId, m.userId, u.login as userLogin, m.message, m.created FROM messages m JOIN users u ON m.userId = u.id WHERE m.id = ?");
                 $sth->setFetchMode(PDO::FETCH_CLASS, 'Message');
                 $sth->execute(array($id));
                 return $sth->fetch();
@@ -155,7 +155,9 @@
             $stmt->execute(array($login));
 
             $user = $stmt->fetch();
-            $user->chats = $this->GetUserChats($user->id);
+            if($user){
+                $user->chats = $this->GetUserChats($user->id);
+            }
             return $user;
         }
 

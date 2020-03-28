@@ -19,8 +19,8 @@ class Messages extends React.Component {
                 (item.isMy ? " align-items-end" : "")
               }
             >
-              <small className="text-muted">{"@"+item.author}</small>
-              <span>{item.text}</span>
+              <small className="text-muted">{"@"+item.userLogin}</small>
+              <span>{item.message}</span>
             </span>
           </div>
         ))}

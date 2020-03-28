@@ -18,7 +18,9 @@ class Message
 {
     public $id;
     public $chatId;
+    public $userLogin;
     public $userId;
     public $message;
     public $created;
 }
+?>

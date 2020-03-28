@@ -2,11 +2,13 @@ import React from "react";
 import InputForm from "./InputForm";
 import Messages from "./Messages";
 import { Link } from "react-router-dom";
+import ChatService from "../chat.service";
 
 class ChatRoom extends React.Component {
   constructor(props) {
     super(props);
-    this.items = [
+    this.service = new ChatService();
+    const items = [
       {
         id: 1,
         author: "vanikakoma",
@@ -33,25 +35,47 @@ class ChatRoom extends React.Component {
       },
       {
         id: 5,
-        author: "vanikakoma",
-        text: "Привет",
+        use: "vanikakoma",
+        message: "Привет",
         isMy: true
       }
     ];
-    this.state = { items: this.items };
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    if (!user) {
+      this.props.history.push("/");
+    }
+    this.state = {
+      items: this.items,
+      user: user,
+      chatId: this.props.match.params.id
+    };
     this.onAddMessage = this.onAddMessage.bind(this);
   }
 
   onAddMessage(text) {
     const newItem = {
-      id: this.state.items.length + 1, 
-      author: "vanikakoma",
-      text: text,
-      isMy: true
+      userId: this.state.user.id,
+      chatId: this.state.chatId,
+      message: text
     };
-    this.setState(state => ({
-      items: state.items.concat(newItem)
-    }));
+    this.service.sendMessage(newItem).then(message => {
+      message.isMy = message.userId == this.state.user.id;
+      this.setState(state => ({
+        items: state.items.concat(message)
+      }));
+    });
+  }
+
+  componentDidMount() {
+    this.service.getChat(this.state.chatId).then(chat => {
+      console.log(chat);
+      this.setState(state => ({
+        items: chat.messages.map(m => {
+          m.isMy = m.userId == this.state.user.id;
+          return m;
+        })
+      }));
+    });
   }
 
   render() {

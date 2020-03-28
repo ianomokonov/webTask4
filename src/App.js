@@ -16,7 +16,7 @@ function App() {
     <Router>
       <Switch>
         <Route exact path="/" component={Enter} />
-        <Route path="/chat-room" component={ChatRoom} />
+        <Route path="/chat-room/:id" component={ChatRoom} />
       </Switch>
     </Router>
   );
