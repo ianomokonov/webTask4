@@ -22,7 +22,7 @@ class InputForm extends React.Component {
       <div className="py-3 d-flex">
         <input id="text" type="text" placeholder="Введите сообщение" className="form-control rounded-0 rounded-left" onKeyPress={this.addMessage}/>
         <button className="btn btn-primary rounded-0 rounded-right far fa-paper-plane" onClick={this.addMessage}></button>
-        <i className="bg-light p-3 fas fa-sync-alt"></i>
+        <i className="bg-light p-3 fas fa-sync-alt" onClick={this.props.onSync}></i>
       </div>
     );
   }

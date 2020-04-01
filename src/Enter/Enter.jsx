@@ -9,6 +9,7 @@ class Enter extends React.Component {
     this.onOnEnterByIdClick = this.onOnEnterByIdClick.bind(this);
     this.onEnterClick = this.onEnterClick.bind(this);
     this.onExitClick = this.onExitClick.bind(this);
+    this.onChooseChatClick = this.onChooseChatClick.bind(this);
     this.service = new ChatService();
     this.state = { user: null };
   }
@@ -25,6 +26,10 @@ class Enter extends React.Component {
       .then(chatId => {
         this.props.history.push(`/chat-room/${chatId}`);
       });
+  }
+
+  onChooseChatClick(id){
+    this.props.history.push(`/chat-room/${id}`);
   }
 
   onOnEnterByIdClick() {
@@ -84,6 +89,14 @@ class Enter extends React.Component {
               >
                 Создать
               </button>
+            </div>
+          </div>
+          <div className="card">
+            <h5 className="card-header">Доступные мне чаты:</h5>
+            <div className="card-body">
+              {this.state.user?.chats.map(chat=>{
+                return <div key={chat.id} onClick={(()=>this.onChooseChatClick(chat.id))}>{chat.login}</div>
+              })}
             </div>
           </div>
           <div className="card mt-3">

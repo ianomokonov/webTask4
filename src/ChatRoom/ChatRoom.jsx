@@ -87,7 +87,7 @@ class ChatRoom extends React.Component {
         </div>
 
         <Messages className="messages" items={this.state.items} />
-        <InputForm className="input-panel" onAdd={this.onAddMessage} />
+        <InputForm className="input-panel" onAdd={this.onAddMessage} onSync={this.componentDidMount}/>
       </div>
     );
   }
