@@ -111,14 +111,14 @@ class Enter extends React.Component {
           <div className="card mt-3">
             <h5 className="card-header">Активные чаты:</h5>
             <div className="card-body">
-              <ul className="list-group">
+              <div className="list-group">
                 {this.state.user?.chats.map(chat=>{
-                  return <li className="list-group-item chatList d-flex justify-content-around" key={chat.id} onClick={(()=>this.onChooseChatClick(chat.id))}>
+                  return <div className="list-group-item chatList d-flex justify-content-around" key={chat.id} onClick={(()=>this.onChooseChatClick(chat.id))}>
                     <div className="d-flex">Номер чата: {chat.id}</div>
                     <div className="d-flex">Название чата: {chat.login}</div>
-                  </li>
+                  </div>
                 })}
-              </ul>
+              </div>
             </div>
           </div>
         </div>

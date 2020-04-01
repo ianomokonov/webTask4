@@ -71,6 +71,7 @@ class ChatRoom extends React.Component {
     this.service.getChat(this.state.chatId).then(chat => {
       this.setState(state => ({
         items: chat.messages.map(m => {
+          state['chatName'] = chat.login;
           m.isMy = m.userId == this.state.user.id;
           return m;
         })
@@ -85,7 +86,10 @@ class ChatRoom extends React.Component {
           <div className="btn btn-link pl-0">
             <Link to="/">Выйти</Link>
           </div>
-          <div className="d-flex justify-content-center align-items-center w-100">Номер чата: {this.state.chatId}</div>
+          <div className="d-flex justify-content-end align-items-center text-muted w-100">Номер чата: {this.state.chatId}</div>
+        </div>
+        <div className="d-flex justify-content-center align-items-center">
+          <div>{this.state.chatName}</div>
         </div>
         <Messages className="messages" items={this.state.items} />
         <InputForm className="input-panel" onAdd={this.onAddMessage} onSync={this.componentDidMount}/>
