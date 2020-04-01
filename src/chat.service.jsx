@@ -42,6 +42,10 @@ export class ChatService {
     const url = `${this.base_url}key=create-chat`;
     return this.post(url, chat);
   }
+  getUserChats(id){
+    const url = `${this.base_url}key=get-user-chats&user_id=${id}`;
+    return this.get(url);
+  }
   getChat(id) {
     const url = `${this.base_url}key=get-chat-by-id&chat_id=${id}`;
     return this.get(url);
