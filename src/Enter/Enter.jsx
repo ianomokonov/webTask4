@@ -91,14 +91,6 @@ class Enter extends React.Component {
               </button>
             </div>
           </div>
-          <div className="card">
-            <h5 className="card-header">Доступные мне чаты:</h5>
-            <div className="card-body">
-              {this.state.user?.chats.map(chat=>{
-                return <div key={chat.id} onClick={(()=>this.onChooseChatClick(chat.id))}>{chat.login}</div>
-              })}
-            </div>
-          </div>
           <div className="card mt-3">
             <h5 className="card-header">Вход по id чата</h5>
             <div className="card-body">
@@ -114,6 +106,19 @@ class Enter extends React.Component {
               >
                 Войти
               </button>
+            </div>
+          </div>
+          <div className="card mt-3">
+            <h5 className="card-header">Активные чаты:</h5>
+            <div className="card-body">
+              <ul className="list-group">
+                {this.state.user?.chats.map(chat=>{
+                  return <li className="list-group-item chatList d-flex justify-content-around" key={chat.id} onClick={(()=>this.onChooseChatClick(chat.id))}>
+                    <div className="d-flex">Номер чата: {chat.id}</div>
+                    <div className="d-flex">Название чата: {chat.login}</div>
+                  </li>
+                })}
+              </ul>
             </div>
           </div>
         </div>

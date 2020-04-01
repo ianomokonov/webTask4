@@ -50,6 +50,7 @@ class ChatRoom extends React.Component {
       chatId: this.props.match.params.id
     };
     this.onAddMessage = this.onAddMessage.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
   }
 
   onAddMessage(text) {
@@ -80,12 +81,12 @@ class ChatRoom extends React.Component {
   render() {
     return (
       <div className="container d-flex flex-column h-100">
-        <div>
+        <div className="d-flex">
           <div className="btn btn-link pl-0">
             <Link to="/">Выйти</Link>
           </div>
+          <div className="d-flex justify-content-center align-items-center w-100">Номер чата: {this.state.chatId}</div>
         </div>
-
         <Messages className="messages" items={this.state.items} />
         <InputForm className="input-panel" onAdd={this.onAddMessage} onSync={this.componentDidMount}/>
       </div>
